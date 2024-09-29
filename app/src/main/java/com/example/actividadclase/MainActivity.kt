@@ -3,34 +3,27 @@ package com.example.actividadclase
 import android.os.Bundle
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
-import androidx.activity.enableEdgeToEdge
-import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.padding
-import androidx.compose.material3.Scaffold
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.tooling.preview.Preview
 import com.example.actividadclase.ui.theme.ActividadClaseTheme
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.height
-import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.shape.CircleShape
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.unit.dp
 import androidx.compose.foundation.Image
-import androidx.compose.foundation.layout.Row
 import androidx.compose.ui.res.painterResource
 import androidx.compose.foundation.border
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Surface
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.items
-import android.content.res.Configuration
 import androidx.compose.foundation.clickable
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
@@ -55,20 +48,21 @@ class MainActivity : ComponentActivity() {
     }
 }
 
-data class Message(val author: String, val body: String)
+data class Message(val author: String, val body: String, val img: Int)
 
 
 @Composable
-fun MessageCard(msg: Message) {
+fun MessageCard(msg: Message, img: Int) {
     Row(modifier = Modifier.padding(all = 8.dp)) {
         Image(
-            painter = painterResource(R.drawable.monkey),
+            painter = painterResource(img),
             contentDescription = null,
             modifier = Modifier
                 .size(40.dp)
                 .clip(CircleShape)
                 .border(1.5.dp, MaterialTheme.colorScheme.secondary, CircleShape)
         )
+
         Spacer(modifier = Modifier.width(8.dp))
 
         // We keep track if the message is expanded or not in this
@@ -114,7 +108,7 @@ fun MessageCard(msg: Message) {
 fun Conversation(messages: List<Message>) {
     LazyColumn {
         items(messages) { message ->
-            MessageCard(message)
+            MessageCard(message, img = message.img)
         }
     }
 }
@@ -124,35 +118,43 @@ object SampleData {
     val conversationSample = listOf(
         Message(
             "Nacho",
-            "Un lolete?"
+            "Un lolete?",
+            R.drawable.monkey
         ),
         Message(
             "Roberto",
-            "Que pereza"
+            "Que pereza",
+            R.drawable.perro
         ),
         Message(
             "Nacho",
-            "Venga un tft chill"
+            "Venga un tft chill",
+            R.drawable.monkey
         ),
         Message(
             "Roberto",
-            "Venga anda pesao pero solo una que luego salgo"
+            "Venga anda pesao pero solo una que luego salgo",
+            R.drawable.perro
         ),
         Message(
             "Nacho",
-            "Pa cuando un Rainbow"
+            "Pa cuando un Rainbow",
+            R.drawable.monkey
         ),
         Message(
             "Roberto",
-            "Mis cojones"
+            "Mis cojones",
+            R.drawable.perro
         ),
         Message(
             "Nacho",
-            "Gei"
+            "Gei",
+            R.drawable.monkey
         ),
         Message(
             "Roberto",
-            "Si soy"
+            "Si soy",
+            R.drawable.perro
         ),
     )
 }
